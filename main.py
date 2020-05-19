@@ -1,15 +1,19 @@
-import newspaper
-from  newspaper import Article
+# import newspaper
+# from  newspaper import Article
+from fastapi import FastAPI
 import requests
 from bs4 import BeautifulSoup
 import re
 from selenium import webdriver
 import time
+import json
+
 
 # option = webdriver.ChromeOptions()
 # option.add_argument('headless')
-driver =webdriver.Chrome(executable_path="chromedriver.exe",)
+# driver =webdriver.Chrome(executable_path="chromedriver.exe",)
 
+app = FastAPI()
 
 #爬取明星板块的热点 5188url
 url = 'https://www.5ce.com/hot/5ce/2/7'
@@ -59,7 +63,7 @@ def get_topic(item):
     topic = uls[1].text[5:]
     return topic
 
-
+@app.get('/hot')
 def get_result():
     res = []
     items = soup.findAll('dd',class_="read-item")
@@ -69,19 +73,19 @@ def get_result():
         itemss['contents']  =  get_contents(item)
         itemss['topic'] = get_topic(item)
         res.append(itemss)
-    return res
+    return  {'code': 200, 'message': '验证成功', 'data': res}
 
 if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app='main:app', host="127.0.0.1", port=2441,reload=True)
 
-    # res =  get_result()
 
 
-
-    url = r'https://www.5ce.com/view/5ce/1f93632a-8b95-ea11-8da3-20040ff9d71d/乔欣杨紫好朋友吗'
-    res = driver.get(url)
-    time.sleep(3)
-    print(driver.find_element_by_class_name('content-detail').text)
-    driver.close()
+    # url = r'https://www.5ce.com/view/5ce/1f93632a-8b95-ea11-8da3-20040ff9d71d/乔欣杨紫好朋友吗'
+    # res = driver.get(url)
+    # time.sleep(3)
+    # print(driver.find_element_by_class_name('content-detail').text)
+    # driver.close()
 
 # print(news.url)
 # #news.url为获取网址的url
