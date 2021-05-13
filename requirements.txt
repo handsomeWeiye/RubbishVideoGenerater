@@ -160,7 +160,7 @@ pycosat==0.6.3
 pycparser==2.19
 pycrypto==2.6.1
 pycurl==7.43.0.5
-pydantic==1.5.1
+pydantic==1.6.2
 pydocstyle==4.0.1
 pyflakes==2.1.1
 Pygments==2.5.2
