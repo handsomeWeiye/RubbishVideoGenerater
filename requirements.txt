@@ -53,7 +53,7 @@ docutils==0.16
 entrypoints==0.3
 et-xmlfile==1.0.1
 Faker==1.0.7
-fastapi==0.54.2
+fastapi==0.65.2
 fastcache==1.1.0
 feedfinder2==0.0.4
 feedparser==5.2.1
